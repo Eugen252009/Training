@@ -80,7 +80,7 @@ h3{
     display: flex;
     -webkit-border-radius: 28;
     -moz-border-radius: 28;
-    border-radius: 28px;
+    border-radius: 8px;
     font-family: 'Merriweather', serif;
     color: #ffffff;
     font-size: 20px;
@@ -107,6 +107,7 @@ h3{
   .footer{
     background-color: #f6f8c5;
     padding: 30px;
+    text-align: center;
   }
   .mailme{
 margin-top: 90px;
