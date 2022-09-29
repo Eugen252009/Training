@@ -1,0 +1,55 @@
+/*
+#B1B2FF
+#AAC4FF
+#D2DAFF
+#EEF1FF
+*/
+
+body {
+    background-color: #B1B2FF;
+    margin: 0;
+}
+
+h1 {
+    color: #D2DAFF;
+    margin: 0;
+    text-align: center;
+}
+
+div {
+    position: absolute;
+    display: inline-block;
+    background-color: #AAC4FF;
+    margin: 0;
+    border: #000;
+    border-style: solid;
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 1.5rem;
+    height: 200px;
+    width: 200px;
+    box-sizing: border-box;
+    border-style: solid;
+}
+
+.erste {
+    background-color: yellow;
+    border-width: 10px;
+    padding: 20px;
+    left: 0px;
+    
+}
+
+.red {
+    background-color: red;
+    border-width: 20px;
+    top: 200px;
+    left: 200px;
+}
+
+.blue {
+    background-color: blue;
+    border-width: 10px;
+    left: 400px;
+    top: 400px;
+}
