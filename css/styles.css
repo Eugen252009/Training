@@ -1,0 +1,15 @@
+#title{
+    background-color: #ff4c68;
+}
+.navbar-brand{
+    font-family: 'Ubuntu', sans-serif;
+}
+.title-txt{
+    font-family: 'Montserrat', sans-serif;
+    size: 3rem;
+    line-height: 1.5;
+    font-weight: 900;
+}
+.container-fluid{
+    padding: 3% 15%;
+}
