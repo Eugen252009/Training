@@ -25,7 +25,7 @@
 
   <body>
     <section id="title">
-      <div class="container-fluid">
+      <div class="title-container container-fluid">
         <!-- Nav Bar -->
 
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -44,13 +44,13 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="#footer">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#pricing">Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Download</a>
+                <a class="nav-link" href="#cta">Download</a>
               </li>
             </ul>
           </div>
@@ -58,7 +58,7 @@
 
         <!-- Title -->
 
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-lg-6 col-sm-12 col-md-12">
               <h1 class="title-txt">Meet new and interesting dogs nearby.</h1>
@@ -87,7 +87,7 @@
     <!-- Features -->
 
     <section id="features">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="featuresdiv col-lg-4 col-md-12 col-sm-12">
             <i class="featuresimg fa-solid fa-circle-check"></i>
@@ -120,8 +120,8 @@
         data-bs-ride="carousel"
       >
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <h2>
+          <div class="carousel-item active container-fluid">
+            <h2 class="testimonial-text">
               I no longer have to sniff other dogs for love. I've found the
               hottest Corgi on TinDog. Woof.
             </h2>
@@ -129,7 +129,7 @@
             <em>Pebbles, New York</em>
           </div>
 
-          <div class="carousel-item">
+          <div class="carousel-item container-fluid">
             <h2 class="testimonial-text">
               My dog used to be so lonely, but with TinDog's help, they've found
               the love of their life. I think.
@@ -179,7 +179,7 @@
     <!-- Pricing -->
 
     <section id="pricing">
-      <h2>A Plan for Every Dog's Needs</h2>
+      <h2 class="price-txt">A Plan for Every Dog's Needs</h2>
       <p>Simple and affordable price plans for your and your dog.</p>
 
       <div class="row row-cols-2 row-cols-lg-3">
@@ -187,7 +187,7 @@
           <div class="card pricingcard">
             <div class="card-body">
               <h3 class="card-title">Chihuahua</h3>
-              <h2>Free</h2>
+              <h2 class="price-txt">Free</h2>
               <p>5 Matches Per Day</p>
               <p>10 Messages Per Day</p>
               <p>Unlimited App Usage</p>
@@ -204,7 +204,7 @@
             <div class="card-body">
               <h3 class="card-title">Labrador</h3>
 
-              <h2>$49 / mo</h2>
+              <h2 class="price-txt">$49 / mo</h2>
               <p>Unlimited Matches</p>
               <p>Unlimited Messages</p>
               <p>Unlimited App Usage</p>
@@ -220,7 +220,7 @@
           <div class="card pricingcard">
             <div class="card-body">
               <h3 class="card-title">Mastiff</h3>
-              <h2>$99 / mo</h2>
+              <h2 class="price-txt">$99 / mo</h2>
               <p>Pirority Listing</p>
               <p>Unlimited Matches</p>
               <p>Unlimited Messages</p>
@@ -239,8 +239,8 @@
     <!-- Call to Action -->
 
     <section id="cta">
-
-      <h3 class="ctatxt">Find the True Love of Your Dog's Life Today.</h3>
+      <div class="container-fluid">
+      <h3 class="big-heading">Find the True Love of Your Dog's Life Today.</h3>
       <button class="btn btn-dark btn-lg downloadbtn" type="button">
                 <i class="fa-brands fa-apple"></i> Download
               </button>
@@ -250,17 +250,21 @@
               >
                 <i class="fa-brands fa-google-play"></i> Download
               </button>
+      </div>
     </section>
 
     <!-- Footer -->
 
     <footer id="footer">
-      <i class="footerbrand fa-brands fa-twitter"></i>
-      <i class="footerbrand fa-brands fa-facebook"></i>
-      <i class="footerbrand fa-brands fa-instagram"></i>
-      <i class="footerbrand fa-solid fa-envelope"></i>
+      <div class="container-fluid">
 
-      <p>© Copyright TinDog</p>
+        <i class="footerbrand fa-brands fa-twitter"></i>
+        <i class="footerbrand fa-brands fa-facebook"></i>
+        <i class="footerbrand fa-brands fa-instagram"></i>
+        <i class="footerbrand fa-solid fa-envelope"></i>
+        
+        <p>© Copyright TinDog</p>
+      </div>
     </footer>
 
     <script
