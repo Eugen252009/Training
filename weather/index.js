@@ -12,7 +12,7 @@ app.post("/", function (req, res) {
   console.log(req.body.cityName);
   var cityName = req.body.cityName;
   var query = cityName;
-  var apikey = "9a34b9c4147a93114f7b0131e99ef86b";
+  var apikey = "";
   var units = "metric";
   var lang = "de";
   const url =
