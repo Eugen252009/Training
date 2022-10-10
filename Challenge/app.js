@@ -50,8 +50,6 @@ const title= req.params.title;
 posts.forEach(post => {
   if(_.lowerCase(post.title)===_.lowerCase(title)){
 res.render("post",{blog:post})
-  }else{
-console.log("Match NOT Found!");
   }
 });
 
