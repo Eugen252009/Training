@@ -1,45 +1,76 @@
-const { MongoClient } = require("mongodb");
-const http = require("http");
-const { assert } = require("console");
+const mongoose = require("mongoose");
 // Connection URI
 const uri = "mongodb://127.0.0.1:27017/?maxPoolSize=20&w=majority";
 
 // Create a new MongoClient
-const client = new MongoClient(uri);
+mongoose.connect("mongodb://localhost:27017/fruitsdb");
 
-async function run() {
-  try {
-    let fruits = [
-      {
-        name: "Apple",
-        score: 9,
-        review: "Hallo",
-      },
-      {
-        name: "Orange",
-        score: 9,
-        review: "Hallo",
-      },
-      {
-        name: "Banana",
-        score: 9,
-        review: "Hallo",
-      },
-    ];
-    const collection = client.db("fruitsdb").collection("fruits");
+const fruitSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Why no Name?"],
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+  },
+  review: String,
+});
+const peopleSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Why no Name?"],
+  },
+ age:Number,
+ favoriteFruit:fruitSchema
+});
 
-    const insertresult = await collection.insertMany(fruits);
+const Fruit = mongoose.model("Fruit", fruitSchema);
+const People = mongoose.model("people", peopleSchema);
 
-    const result = await collection.find({ name: "Apple" }).toArray();
+// const fruit = new Fruit({
+//   name: "Mango",
+//   rating: 9,
+//   review: "Nice one",
+// });
 
-    const deleted = await collection.deleteMany({});
 
-    console.log(result);
-    console.log(insertresult);
-    console.log(deleted);
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+const people = new People({
+  name: "John",
+  age:37,
+  // favoriteFruit:{name:"Mango"}
+});
+
+// fruit.save();
+// people.save();
+
+People.updateOne({name:"John"},{favoriteFruit:mango},(err)=>{
+if (err) {
+  console.log(err);
+}else{
+  console.log("NICE ONE!");
 }
-run().catch(console.dir);
+});
+
+
+
+// Fruit.updateOne(
+//   { _id: "6345b0390535ce156ce0fe8f" },
+//   { name: "Peach" },
+//   (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Successfully Updated!");
+//     }
+//   }
+// );
+// Fruit.deleteMany({ name: "Apple" }, (err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Success!");
+//   }
+//    mongoose.connection.close();
+// });
