@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
+const _ = require('lodash');
 
 mongoose.connect("mongodb://localhost:27017/todolistdb");
 
@@ -106,7 +107,7 @@ if (listName==="Heute"){
 });
 
 app.get("/:adress", (req, res) => {
-  const adress = req.params.adress;
+  const adress = _.capitalize(req.params.adress);
 
   List.findOne(
     {
