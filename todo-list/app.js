@@ -81,6 +81,8 @@ app.get("/about", function (req, res) {
 
 app.post("/delete", (req, res) => {
   const checkedItemID = req.body.checkbox;
+  const listName = req.body.listName;
+if (listName==="Heute"){
   List.findByIdAndRemove(checkedItemID, (err) => {
     if (err) {
       console.log(err);
@@ -89,6 +91,18 @@ app.post("/delete", (req, res) => {
     }
     res.redirect("/");
   });
+}else{
+  List.findOneAndUpdate({name:listName},{$pull:{items:{_id:checkedItemID} }},(err,result)=> {
+    console.log(err);
+    if(!err){
+      res.redirect("/"+listName);
+    }
+    console.log(result);
+  });
+
+
+}
+  
 });
 
 app.get("/:adress", (req, res) => {
