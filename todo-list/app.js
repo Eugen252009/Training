@@ -1,42 +1,125 @@
 const express = require("express");
 const app = express();
 const date = require(__dirname + "/date.js");
+const mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost:27017/todolistdb");
+
+const items = {};
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
 console.log(date.getDate());
-const items = ["Buy Food", "Cook Food", "Eat Food"];
-const workItems = [];
+
+const itemSchema = new mongoose.Schema({
+  name: String,
+});
+
+const Tasks = mongoose.model("Task", itemSchema);
+
+const DefaultItems = [
+  { name: "New LiSt" },
+  { name: "ADD" },
+  { name: "Delete" },
+];
+
+const listSchema = {
+  name: String,
+  items: [itemSchema],
+};
+const List = mongoose.model("List", listSchema);
 
 app.get("/", function (req, res) {
-  const day = date.getDate();
-  res.render("list", { listTitle: day, ListItems: items });
+  Tasks.find({}, (err, foundItems) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(foundItems);
+      if (foundItems.length === 0) {
+        Tasks.insertMany(DefaultItems, (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Successfully added Default Items!");
+          }
+        });
+        res.redirect("/");
+      }
+      res.render("list", { listTitle: "Heute", ListItems: foundItems });
+    }
+  });
+  // const day = date.getDate();
+  // const tasks = Tasks.find({}, (err, task) => {
+  //   res.render("list", { listTitle: day, ListItems: task });
 });
 
 app.post("/", function (req, res) {
-  const item=(req.body.todo);
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
-  console.log(items);
-});
+  const itemName = req.body.todo;
+  const listName = req.body.list;
 
-app.get("/work", function (req, res) {
-  res.render("list", { listTitle: "Work", ListItems: workItems });
-});
-app.post("/work", function (req, res) {
-  res.redirect("/work");
+  const item = new Tasks({
+    name: itemName,
+  });
+
+  if (listName === "Heute") {
+    res.redirect("/");
+  } else {
+    List.findOne({ name: listName }, (err, list) => {
+      list.items.push(item);
+      console.log(item);
+      console.log(list);
+      list.save();
+      res.redirect("/" + listName);
+    });
+  }
 });
 
 app.get("/about", function (req, res) {
   res.render("about");
 });
+
+app.post("/delete", (req, res) => {
+  const checkedItemID = req.body.checkbox;
+  List.findByIdAndRemove(checkedItemID, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Erfolgreich!");
+    }
+    res.redirect("/");
+  });
+});
+
+app.get("/:adress", (req, res) => {
+  const adress = req.params.adress;
+
+  List.findOne(
+    {
+      name: adress,
+    },
+    (err, listed) => {
+      if (!err) {
+        if (!listed) {
+          const liSt = new List({
+            name: adress,
+            items: DefaultItems,
+          });
+          liSt.save();
+          res.redirect("/" + adress);
+        } else {
+          res.render("list", {
+            listTitle: listed.name,
+            ListItems: listed.items,
+          });
+        }
+      } else {
+        console.log(err);
+      }
+    }
+  );
+});
+
 app.listen(3000, function () {
   console.log("Server started on Port 3000");
 });
